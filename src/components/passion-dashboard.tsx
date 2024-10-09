@@ -13,14 +13,16 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 
+const initialPassions = [
+  { id: 1, title: "Home Renovation", color: "bg-blue-500", tasks: ["Plan layout", "Choose materials"], expanded: false },
+  { id: 2, title: "Fitness Goals", color: "bg-green-500", tasks: ["Set up gym schedule", "Meal prep"], expanded: false },
+  { id: 3, title: "Career Development", color: "bg-purple-500", tasks: ["Update resume", "Network"], expanded: false },
+]
+
 export function PassionDashboard() {
-  const [passions, setPassions] = useState([
-    { id: 1, title: "Home Renovation", color: "bg-blue-500", tasks: ["Plan layout", "Choose materials"], expanded: false },
-    { id: 2, title: "Fitness Goals", color: "bg-green-500", tasks: ["Set up gym schedule", "Meal prep"], expanded: false },
-    { id: 3, title: "Career Development", color: "bg-purple-500", tasks: ["Update resume", "Network"], expanded: false },
-  ])
+  const [passions, setPassions] = useState<Passion[]>(initialPassions)
   const [newPassion, setNewPassion] = useState("")
-  const [selectedPassion, setSelectedPassion] = useState(null)
+  const [selectedPassion, setSelectedPassion] = useState<Passion>(initialPassions[0])
   const [newTask, setNewTask] = useState("")
   const [isAddingPassion, setIsAddingPassion] = useState(false)
 
@@ -53,7 +55,7 @@ export function PassionDashboard() {
     }
   }
 
-  const togglePassionExpansion = (id) => {
+  const togglePassionExpansion = (id: number) => {
     setPassions(passions.map(passion => 
       passion.id === id ? { ...passion, expanded: !passion.expanded } : passion
     ))
